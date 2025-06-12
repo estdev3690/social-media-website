@@ -2,7 +2,13 @@
 
 A modern, responsive social media platform built with React, Node.js, and MongoDB. This application provides a rich set of features for social interaction, content sharing, and user engagement.
 
-![Social Media App Screenshot](screenshot.png)
+## 📸 Preview
+
+Here's a look at the application interface:
+
+![Social Media App Screenshot](./frontend/src/assets/arena%20screenshot.png)
+
+The application features a clean, modern design with full responsiveness and a rich set of social features.
 
 ## 🌟 Features
 
