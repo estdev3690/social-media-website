@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
-  const backendUrl = "http://localhost:5000";
+  const backendUrl = "https://social-media-website-gmvw.onrender.com";
 
   const [token, setToken] = useState(!!cookie.get("token"));
   const [user, setUser] = useState(null);
