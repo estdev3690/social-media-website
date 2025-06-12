@@ -56,10 +56,10 @@ const register = async (req, res) => {
 
     // Set cookie
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: "Lax",
-      maxAge: 3600000,
+      httpOnly: true, // ✅ Recommended: Prevents JavaScript access to cookie (XSS protection)
+      secure: process.env.NODE_ENV === 'production', // ✅ True in production to enforce HTTPS
+      sameSite: "Lax", // ✅ Good balance: CSRF protection while allowing top-level GET navigation
+      maxAge: 3600000, // ✅ 1 hour in milliseconds
     });
 
     // Send response
@@ -115,10 +115,10 @@ const login = async (req, res) => {
     );
 
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false,
-      sameSite: "Lax",
-      maxAge: 3600000,
+      httpOnly: true, // ✅ Recommended: Prevents JavaScript access to cookie (XSS protection)
+      secure: process.env.NODE_ENV === 'production', // ✅ True in production to enforce HTTPS
+      sameSite: "Lax", // ✅ Good balance: CSRF protection while allowing top-level GET navigation
+      maxAge: 3600000, // ✅ 1 hour in milliseconds
     });
 
 
