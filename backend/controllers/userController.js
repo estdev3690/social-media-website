@@ -288,4 +288,39 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-export { register, login, logout, me, followUser, unfollowUser, getUserProfile };
+const getAllUsers = async (req, res) => {
+  try {
+    const currentUser = await userModel.findById(req.user);
+    if (!currentUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    // Get all users except the current user
+    const users = await userModel
+      .find({ _id: { $ne: currentUser._id } })
+      .select('username avatar followers following')
+      .sort({ username: 1 });
+
+    // Add following status for each user
+    const usersWithFollowingStatus = users.map(user => ({
+      ...user.toObject(),
+      isFollowing: user.followers.includes(currentUser._id)
+    }));
+
+    res.status(200).json({
+      success: true,
+      users: usersWithFollowingStatus
+    });
+  } catch (error) {
+    console.error('Get all users error:', error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
+  }
+};
+
+export { register, login, logout, me, followUser, unfollowUser, getUserProfile, getAllUsers };
